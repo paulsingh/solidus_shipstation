@@ -1,4 +1,4 @@
-Spree::Shipment.class_eval do
+module Spree::ShipmentDecorator
   def self.exportable
     query = order(:updated_at).joins(:order).merge(Spree::Order.complete).where.not(spree_shipments: { state: 'canceled' })
     query = query.ready unless Spree::Config.shipstation_capture_at_notification
@@ -12,4 +12,6 @@ Spree::Shipment.class_eval do
       from, to, from, to
     )
   end
+
+  Spree::Order.prepend self
 end
