@@ -13,5 +13,5 @@ module Spree::ShipmentDecorator
     )
   end
 
-  Spree::Order.prepend self
+  Spree::Shipment.prepend self
 end
