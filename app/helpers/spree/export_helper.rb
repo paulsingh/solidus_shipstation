@@ -12,19 +12,19 @@ module Spree
       address = order.send("#{type}_address")
 
       xml.__send__(name) {
-        xml.Name{ |xml| xml.cdata!(address.full_name.to_json) } 
-        xml.Company{ |xml| xml.cdata!(address.company.to_json) } 
+        xml.tag!("Name") { xml.cdata!(address.full_name.to_json) }
+        xml.tag!("Company") { xml.cdata!(address.company.to_json) }
 
         if type == :ship
-          xml.Address1{ |xml| xml.cdata!(address.address1.to_json) } 
-          xml.Address2{ |xml| xml.cdata!(address.address2.to_json) } 
-          xml.City{ |xml| xml.cdata!(address.city.to_json) } 
-          xml.State{ |xml| xml.cdata!(address.state ? address.state.abbr : address.state_name.to_json) } 
-          xml.PostalCode{ |xml| xml.cdata!(address.zipcode.to_json) } 
-          xml.Country{ |xml| xml.cdata!(address.country.iso.to_json) } 
+          xml.tag!("Address1") { xml.cdata!(address.address1.to_json) }
+          xml.tag!("Address2") { xml.cdata!(address.address2.to_json) }
+          xml.tag!("City") { xml.cdata!(address.city.to_json) }
+          xml.tag!("State") { xml.cdata!(address.state ? address.state.abbr : address.state_name.to_json) }
+          xml.tag!("PostalCode") { xml.cdata!(address.zipcode.to_json) }
+          xml.tag!("Country") { xml.cdata!(address.country.iso.to_json) }
         end
 
-        xml.Phone{ |xml| xml.cdata!(address.phone.to_json) } 
+        xml.tag!("Phone") { xml.cdata!(address.phone.to_json) }
       }
     end
     # rubocop:enable all
